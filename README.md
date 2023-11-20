@@ -1,6 +1,6 @@
 # Feather Push Driver FCM
 
-A Push driver for the Feather CMS Push service using NIO FCM.
+A Push driver for the Feather CMS Push service using Google FCM.
 
 ## Getting started
 
@@ -13,7 +13,7 @@ Use at your own risk.
 To add a dependency on the package, declare it in your `Package.swift`:
 
 ```swift
-.package(url: "https://github.com/feather-framework/feather-push-driver-fcm.git", .upToNextMinor(from: "0.1.0")),
+.package(url: "https://github.com/feather-framework/feather-push-driver-fcm", .upToNextMinor(from: "0.1.0")),
 ```
 
 and to your application target, add `FeatherPushDriverFCM` to your dependencies:
@@ -31,7 +31,7 @@ import PackageDescription
 let package = Package(
     name: "my-application",
     dependencies: [
-        .package(url: "https://github.com/feather-framework/feather-Push-driver-fcm.git", .upToNextMinor(from: "0.1.0")),
+        .package(url: "https://github.com/feather-framework/feather-Push-driver-fcm", .upToNextMinor(from: "0.1.0")),
     ],
     targets: [
         .target(name: "MyApplication", dependencies: [
