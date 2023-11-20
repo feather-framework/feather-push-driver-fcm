@@ -9,13 +9,17 @@ import FCM
 import AsyncHTTPClient
 import FeatherService
 
-struct FCMPushServiceContext: ServiceContext {
+public struct FCMPushServiceContext: ServiceContext {
 
     let client: HTTPClient
     let credentials: FCMCredentials
-
-    func createDriver() throws -> ServiceDriver {
-        FCMPushServiceDriver()
+    
+    public init(client: HTTPClient, credentials: FCMCredentials) {
+        self.client = client
+        self.credentials = credentials
     }
 
+    public func createDriver() throws -> ServiceDriver {
+        FCMPushServiceDriver()
+    }
 }
