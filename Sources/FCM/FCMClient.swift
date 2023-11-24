@@ -41,7 +41,7 @@ public struct FCMClient {
 
         let token = try await requestToken()
         guard messages.count > 1 else {
-            return try await send1(messages[1], token)
+            return try await send1(messages[0], token)
         }
 
         for batch in messages.chunked(batchSize: 500) {
@@ -72,9 +72,12 @@ public struct FCMClient {
             grantType: "urn:ietf:params:oauth:grant-type:jwt-bearer",
             assertion: jwt
         )
+        
+//        print(jwt)
         let encoder = JSONEncoder()
         let requestBodyData = try encoder.encode(requestBody)
 
+        
         var headers = HTTPHeaders()
         headers.add(name: "Content-Type", value: "application/json")
 
@@ -93,16 +96,22 @@ public struct FCMClient {
         guard response.status == .ok else {
             throw FCMClientError.invalidResponse
         }
-        guard
-            let rawSize = response.headers.first(name: "content-length"),
-            let maxBodySize = Int(rawSize)
-        else {
-            throw FCMClientError.invalidContentLength
+        var buffer = ByteBuffer()
+        for try await chunk in response.body {
+            var chunk = chunk
+            buffer.writeBuffer(&chunk)
         }
+//        guard
+//            let rawSize = response.headers.first(name: "content-length"),
+//            let maxBodySize = Int(rawSize)
+//        else {
+//            throw FCMClientError.invalidContentLength
+//        }
 
-        let body = try await response.body.collect(upTo: maxBodySize)
+//        let body = try await response.body.collect(upTo: maxBodySize)
+//        print(buffer.getString(at: 0, length: buffer.readableBytes))
         let decoder = JSONDecoder()
-        return try decoder.decode(FCMToken.self, from: body)
+        return try decoder.decode(FCMToken.self, from: buffer)
     }
 
     // MARK: - helpers
