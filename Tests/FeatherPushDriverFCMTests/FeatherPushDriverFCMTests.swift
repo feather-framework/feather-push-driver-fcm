@@ -37,29 +37,29 @@ final class FeatherPushDriverFCMTests: XCTestCase {
     var clientEmail: String {
         ProcessInfo.processInfo.environment["PUSH_CLIENT_EMAIL"]!
     }
-    
+
     var clientId: String {
         ProcessInfo.processInfo.environment["PUSH_CLIENT_ID"]!
     }
-    
+
     var certURL: String {
         ProcessInfo.processInfo.environment["PUSH_CERT_URL"]!
     }
-    
+
     var token: String {
         ProcessInfo.processInfo.environment["PUSH_TOKEN"]!
     }
-    
+
     var messageType: String {
         ProcessInfo.processInfo.environment["PUSH_MESSAGE_TYPE"] ?? "data"
     }
-    
+
     func testFCMDriverUsingTestSuite() async throws {
         let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1)
 
         do {
             let registry = ComponentRegistry()
-            
+
             let credentials = FCMCredentials(
                 type: type,
                 projectId: projectId,
@@ -76,20 +76,20 @@ final class FeatherPushDriverFCMTests: XCTestCase {
             )
 
             let httpClient = HTTPClient(eventLoopGroupProvider: .singleton)
-            
+
             try await registry.addPush(
                 FCMPushComponentContext(
                     client: httpClient,
                     credentials: credentials
                 )
             )
-            
+
             try await registry.run()
             let push = try await registry.push()
-            
+
             do {
                 // TODO: test
-//                let suite = PushTestSuite(push)
+                //                let suite = PushTestSuite(push)
 
                 try await registry.shutdown()
             }
@@ -97,7 +97,7 @@ final class FeatherPushDriverFCMTests: XCTestCase {
                 try await registry.shutdown()
                 throw error
             }
-            
+
             try await httpClient.shutdown()
         }
         catch {

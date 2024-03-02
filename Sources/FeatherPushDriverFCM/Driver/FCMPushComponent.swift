@@ -39,7 +39,7 @@ struct FCMPushComponent {
 }
 
 extension FCMPushComponent: PushComponent {
-    
+
     func send(
         notification: Notification,
         to recipients: [Recipient]

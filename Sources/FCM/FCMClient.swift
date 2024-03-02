@@ -72,12 +72,11 @@ public struct FCMClient {
             grantType: "urn:ietf:params:oauth:grant-type:jwt-bearer",
             assertion: jwt
         )
-        
-//        print(jwt)
+
+        //        print(jwt)
         let encoder = JSONEncoder()
         let requestBodyData = try encoder.encode(requestBody)
 
-        
         var headers = HTTPHeaders()
         headers.add(name: "Content-Type", value: "application/json")
 
@@ -101,15 +100,15 @@ public struct FCMClient {
             var chunk = chunk
             buffer.writeBuffer(&chunk)
         }
-//        guard
-//            let rawSize = response.headers.first(name: "content-length"),
-//            let maxBodySize = Int(rawSize)
-//        else {
-//            throw FCMClientError.invalidContentLength
-//        }
+        //        guard
+        //            let rawSize = response.headers.first(name: "content-length"),
+        //            let maxBodySize = Int(rawSize)
+        //        else {
+        //            throw FCMClientError.invalidContentLength
+        //        }
 
-//        let body = try await response.body.collect(upTo: maxBodySize)
-//        print(buffer.getString(at: 0, length: buffer.readableBytes))
+        //        let body = try await response.body.collect(upTo: maxBodySize)
+        //        print(buffer.getString(at: 0, length: buffer.readableBytes))
         let decoder = JSONDecoder()
         return try decoder.decode(FCMToken.self, from: buffer)
     }

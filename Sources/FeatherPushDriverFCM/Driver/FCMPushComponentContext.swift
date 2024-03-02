@@ -10,10 +10,10 @@ import AsyncHTTPClient
 import FeatherComponent
 
 public struct FCMPushComponentContext: ComponentContext {
-    
+
     let client: HTTPClient
     let credentials: FCMCredentials
-    
+
     public init(client: HTTPClient, credentials: FCMCredentials) {
         self.client = client
         self.credentials = credentials

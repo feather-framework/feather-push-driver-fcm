@@ -31,19 +31,19 @@ final class PushTests: XCTestCase {
     var clientEmail: String {
         ProcessInfo.processInfo.environment["PUSH_CLIENT_EMAIL"]!
     }
-    
+
     var clientId: String {
         ProcessInfo.processInfo.environment["PUSH_CLIENT_ID"]!
     }
-    
+
     var certURL: String {
         ProcessInfo.processInfo.environment["PUSH_CERT_URL"]!
     }
-    
+
     var token: String {
         ProcessInfo.processInfo.environment["PUSH_TOKEN"]!
     }
-    
+
     var messageType: String {
         ProcessInfo.processInfo.environment["PUSH_MESSAGE_TYPE"] ?? "data"
     }
