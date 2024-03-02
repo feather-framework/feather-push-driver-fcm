@@ -1,11 +1,11 @@
 //
-//  FCMPushService.swift
+//  FCMPushComponent.swift
 //  FeatherPushDriverFCM
 //
 //  Created by Tibor Bodecs on 2020. 04. 28..
 //
 
-import FeatherService
+import FeatherComponent
 import FeatherPush
 import FCM
 
@@ -22,24 +22,24 @@ extension Platform {
 }
 
 @dynamicMemberLookup
-struct FCMPushService {
+struct FCMPushComponent {
 
-    let config: ServiceConfig
+    let config: ComponentConfig
 
     subscript<T>(
-        dynamicMember keyPath: KeyPath<FCMPushServiceContext, T>
+        dynamicMember keyPath: KeyPath<FCMPushComponentContext, T>
     ) -> T {
-        let context = config.context as! FCMPushServiceContext
+        let context = config.context as! FCMPushComponentContext
         return context[keyPath: keyPath]
     }
 
-    init(config: ServiceConfig) {
+    init(config: ComponentConfig) {
         self.config = config
     }
 }
 
-extension FCMPushService: PushService {
-
+extension FCMPushComponent: PushComponent {
+    
     func send(
         notification: Notification,
         to recipients: [Recipient]

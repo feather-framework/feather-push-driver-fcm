@@ -9,7 +9,7 @@ import NIO
 import Logging
 import Foundation
 import XCTest
-import FeatherService
+import FeatherComponent
 import FeatherPush
 import FeatherPushDriverFCM
 import XCTFeatherPush
@@ -58,7 +58,7 @@ final class FeatherPushDriverFCMTests: XCTestCase {
         let eventLoopGroup = MultiThreadedEventLoopGroup(numberOfThreads: 1)
 
         do {
-            let registry = ServiceRegistry()
+            let registry = ComponentRegistry()
             
             let credentials = FCMCredentials(
                 type: type,
@@ -77,8 +77,8 @@ final class FeatherPushDriverFCMTests: XCTestCase {
 
             let httpClient = HTTPClient(eventLoopGroupProvider: .singleton)
             
-            try await registry.add(
-                FCMPushServiceContext(
+            try await registry.addPush(
+                FCMPushComponentContext(
                     client: httpClient,
                     credentials: credentials
                 )

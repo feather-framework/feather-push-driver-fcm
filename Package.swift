@@ -8,6 +8,7 @@ let package = Package(
         .iOS(.v16),
         .tvOS(.v16),
         .watchOS(.v9),
+        .visionOS(.v1),
     ],
     products: [
         .library(name: "FeatherPushDriverFCM", targets: ["FeatherPushDriverFCM"]),
@@ -17,7 +18,7 @@ let package = Package(
         .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.17.0"),
         .package(url: "https://github.com/vapor/jwt-kit.git", from: "4.9.0"),
         .package(url: "https://github.com/feather-framework/feather-push",
-            .upToNextMinor(from: "0.2.0")
+            .upToNextMinor(from: "0.3.0")
         ),
     ],
     targets: [

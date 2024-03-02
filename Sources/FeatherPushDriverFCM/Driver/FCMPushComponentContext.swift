@@ -1,5 +1,5 @@
 //
-//  FCMPushServiceContext.swift
+//  FCMPushComponentContext.swift
 //  FeatherPushDriverFCM
 //
 //  Created by Tibor Bodecs on 2020. 04. 28..
@@ -7,10 +7,10 @@
 
 import FCM
 import AsyncHTTPClient
-import FeatherService
+import FeatherComponent
 
-public struct FCMPushServiceContext: ServiceContext {
-
+public struct FCMPushComponentContext: ComponentContext {
+    
     let client: HTTPClient
     let credentials: FCMCredentials
     
@@ -19,7 +19,7 @@ public struct FCMPushServiceContext: ServiceContext {
         self.credentials = credentials
     }
 
-    public func createDriver() throws -> ServiceDriver {
-        FCMPushServiceDriver()
+    public func make() throws -> ComponentBuilder {
+        FCMPushComponentBuilder()
     }
 }
