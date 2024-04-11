@@ -7,6 +7,7 @@
 
 import JWTKit
 
+/// fcm jwt payload
 struct FCMJWTPayload: JWTPayload {
 
     var iss: IssuerClaim

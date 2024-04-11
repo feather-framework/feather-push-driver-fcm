@@ -5,8 +5,10 @@
 //  Created by Tibor Bodecs on 2023. 01. 16..
 //
 
+/// fcm  payload
 public struct FCMPayload: Encodable {
 
+    /// fcm  payload message
     public struct Message: Encodable {
 
         public enum PushType: String, Encodable {
@@ -14,6 +16,7 @@ public struct FCMPayload: Encodable {
             case notification
         }
 
+        /// fcm payload  contents
         public struct Contents: Encodable {
 
             struct CodingKeys: CodingKey, ExpressibleByStringLiteral {
@@ -37,10 +40,14 @@ public struct FCMPayload: Encodable {
                 }
             }
 
+            /// title
             public let title: String
+            /// body
             public let body: String
+            /// userInfo
             public let userInfo: [String: String]
 
+            /// fcm payload  contents init
             public init(
                 title: String,
                 body: String,
@@ -51,6 +58,7 @@ public struct FCMPayload: Encodable {
                 self.userInfo = userInfo
             }
 
+            /// fcm payload  contents encode
             public func encode(to encoder: Encoder) throws {
                 var container = encoder.container(keyedBy: CodingKeys.self)
                 try container.encode(self.title, forKey: CodingKeys.title)
@@ -102,10 +110,14 @@ public struct FCMPayload: Encodable {
             }
         }
 
+        /// token
         public let token: String
+        /// type
         public let type: PushType
+        /// contents
         public let contents: Contents
 
+        /// fcm  payload message init
         public init(
             token: String,
             type: PushType,
@@ -116,6 +128,7 @@ public struct FCMPayload: Encodable {
             self.contents = contents
         }
 
+        /// fcm  payload message encode
         public func encode(to encoder: Encoder) throws {
             var container = encoder.container(keyedBy: CodingKeys.self)
             try container.encode(self.token, forKey: CodingKeys.token)
@@ -123,8 +136,10 @@ public struct FCMPayload: Encodable {
         }
     }
 
+    /// fcm  payload message
     public let message: Message
 
+    /// fcm  payload message init
     public init(message: Message) {
         self.message = message
     }

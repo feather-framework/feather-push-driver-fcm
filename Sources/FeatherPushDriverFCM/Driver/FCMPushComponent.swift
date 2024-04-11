@@ -33,9 +33,6 @@ struct FCMPushComponent {
         return context[keyPath: keyPath]
     }
 
-    init(config: ComponentConfig) {
-        self.config = config
-    }
 }
 
 extension FCMPushComponent: PushComponent {

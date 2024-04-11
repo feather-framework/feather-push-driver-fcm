@@ -84,17 +84,13 @@ final class FeatherPushDriverFCMTests: XCTestCase {
                 )
             )
 
-            try await registry.run()
             let push = try await registry.push()
-
             do {
-                // TODO: test
-                //                let suite = PushTestSuite(push)
+                let suite = PushTestSuite(push)
+                try await suite.testAll(from: "from", to: "to")
 
-                try await registry.shutdown()
             }
             catch {
-                try await registry.shutdown()
                 throw error
             }
 

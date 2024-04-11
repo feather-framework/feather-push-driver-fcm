@@ -5,7 +5,7 @@
 
 import FeatherComponent
 
-struct FCMPushComponentBuilder: ComponentBuilder {
+struct FCMPushComponentFactory: ComponentFactory {
 
     func build(using config: ComponentConfig) throws -> Component {
         FCMPushComponent(config: config)

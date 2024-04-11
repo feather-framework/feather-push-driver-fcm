@@ -15,6 +15,7 @@ public enum FCMClientError: Error {
     case invalidResponse
 }
 
+/// fcm client
 public struct FCMClient {
 
     var credentials: FCMCredentials
@@ -22,6 +23,7 @@ public struct FCMClient {
     let timeout: TimeAmount
     let logger: Logger
 
+    /// fcm client init
     public init(
         client: HTTPClient,
         credentials: FCMCredentials,
@@ -34,6 +36,7 @@ public struct FCMClient {
         self.logger = logger
     }
 
+    /// fcm client send
     public func send(_ messages: [FCMPayload]) async throws {
         guard !messages.isEmpty else {
             return
