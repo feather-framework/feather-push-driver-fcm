@@ -63,20 +63,17 @@ public struct FCMClient {
             iat: .init(value: now),
             exp: .init(value: now.addingTimeInterval(3600))
         )
-        let jwt =
-            try JWTSigner.rs256(
-                key: .private(
-                    pem: credentials.privateKey
-                )
-            )
-            .sign(jwtPayload)
+
+        let pk = try Insecure.RSA.PrivateKey(pem: credentials.privateKey)
+        let keys = await JWTKeyCollection()
+            .add(rsa: pk, digestAlgorithm: .sha256)
+        let jwt = try await keys.sign(jwtPayload)
 
         let requestBody = FCMJWTBody(
             grantType: "urn:ietf:params:oauth:grant-type:jwt-bearer",
             assertion: jwt
         )
 
-        //        print(jwt)
         let encoder = JSONEncoder()
         let requestBodyData = try encoder.encode(requestBody)
 
@@ -179,7 +176,6 @@ public struct FCMClient {
         _ token: FCMToken
     ) async throws {
         let token = try await requestToken()
-
         var headers = HTTPHeaders()
         headers.add(name: "Content-Type", value: "application/json")
         headers.add(name: "Authorization", value: "Bearer " + token.accessToken)
