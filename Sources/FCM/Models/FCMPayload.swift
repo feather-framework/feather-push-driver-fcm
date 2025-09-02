@@ -11,6 +11,7 @@ public struct FCMPayload: Encodable {
     /// fcm  payload message
     public struct Message: Encodable {
 
+        /// PushType
         public enum PushType: String, Encodable {
             case data
             case notification

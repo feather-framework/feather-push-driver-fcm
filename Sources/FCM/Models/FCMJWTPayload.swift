@@ -16,6 +16,7 @@ struct FCMJWTPayload: JWTPayload {
     var iat: IssuedAtClaim
     var exp: ExpirationClaim
 
+    /// verify
     public func verify(using algorithm: some JWTAlgorithm)
         async throws
     {

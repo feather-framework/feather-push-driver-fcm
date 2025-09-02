@@ -9,6 +9,7 @@ import NIOSSL
 import NIOTLS
 import NIOFoundationCompat
 
+/// FCMClientError
 public enum FCMClientError: Error {
     case invalidRequestBody
     case invalidContentLength
