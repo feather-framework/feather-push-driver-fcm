@@ -6,21 +6,24 @@ on:
     - main
 
 jobs:
-  
-  run-checks:
-    # runs-on: macOS-latest
-    runs-on: self-hosted
-    steps:
-    
-    - name: Checkout
-      uses: actions/checkout@v4
-      with:
-        fetch-depth: 1
-    
-    - name: Install Dependencies
-      run: |
-        brew install mint
-        mint install NickLockwood/SwiftFormat@0.53.4 --no-link
-    
-    - name: run script
-      run: ./scripts/run-checks.sh
+
+  swiftlang_checks:
+    name: Swiftlang Checks
+    uses: swiftlang/github-workflows/.github/workflows/soundness.yml@main
+    with:
+      license_header_check_project_name: "not_checking"
+      format_check_enabled : true
+      broken_symlink_check_enabled : true
+      unacceptable_language_check_enabled : true
+      api_breakage_check_enabled : false
+      docs_check_enabled : false
+      license_header_check_enabled : false
+      shell_check_enabled : false
+      yamllint_check_enabled : false
+      python_lint_check_enabled : false
+
+  bb_checks:
+    name: BB Checks
+    uses: BinaryBirds/github-workflows/.github/workflows/extra_soundness.yml@main
+    with:
+      local_swift_dependencies_check_enabled : true

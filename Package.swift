@@ -15,8 +15,8 @@ let package = Package(
         .library(name: "FCM", targets: ["FCM"]),
     ],
     dependencies: [
-        .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.17.0"),
-        .package(url: "https://github.com/vapor/jwt-kit.git", from: "4.9.0"),
+        .package(url: "https://github.com/swift-server/async-http-client.git", from: "1.21.2"),
+        .package(url: "https://github.com/vapor/jwt-kit.git", .upToNextMinor(from: "5.1.0")),
         .package(url: "https://github.com/feather-framework/feather-push",
             .upToNextMinor(from: "0.4.0")
         ),
